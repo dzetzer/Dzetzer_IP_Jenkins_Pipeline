@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+    environment {
+        PIPELINE_NAME = 'Test Pipeline'
+	}
+    stages {
+        stage('log title') {
+            steps {
+                sh "echo \hello world ${PIPELINE_NAME} build number ${BUILD_NUMBER} >> testTextFile.txt"
+            }
+        }
+        stage('increment value') {
+            steps {
+                sh "echo \hello world ${PIPELINE_NAME} >> testTextFile.txt"
+            }
+        }
+    }
+}
