@@ -6,12 +6,7 @@ pipeline {
     stages {
         stage('log title') {
             steps {
-                sh "echo \hello world ${PIPELINE_NAME} build number ${BUILD_NUMBER} >> testTextFile.txt"
-            }
-        }
-        stage('increment value') {
-            steps {
-                sh "echo \hello world ${PIPELINE_NAME} >> testTextFile.txt"
+                echo "\hello world ${PIPELINE_NAME} build number ${BUILD_NUMBER} >> testTextFile.txt"
             }
         }
     }
