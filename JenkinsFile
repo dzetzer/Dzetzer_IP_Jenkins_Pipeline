@@ -6,7 +6,8 @@ pipeline {
     stages {
         stage('log title') {
             steps {
-                echo "\hello world ${PIPELINE_NAME} build number ${BUILD_NUMBER} >> testTextFile.txt"
+                sh "echo \hello world ${PIPELINE_NAME} build number ${BUILD_NUMBER} >> testTextFile.txt"
+                echo "build number ${BUILD_NUMBER}"
             }
         }
     }
