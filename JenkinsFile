@@ -31,7 +31,7 @@ pipeline {
                 } 
             }
             steps { 
-                echo "branch ${BRANCH_NAME}" 
+                echo "branch ${env.BRANCH_NAME}" 
             }
         }
         stage('log text file changes') {
