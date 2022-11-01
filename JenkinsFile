@@ -5,10 +5,6 @@ pipeline {
         cron('H H * * *')
     }
 
-    parameters {
-
-    }
-
     environment {
         PIPELINE_NAME = 'Test Pipeline'
 	}
