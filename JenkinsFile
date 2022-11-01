@@ -27,11 +27,13 @@ pipeline {
             }
         }
 
-        stage('report changes') {
-                when{ not { branch 'main' } }
-                steps{ echo "branch ${BRANCH_NAME}" }
-                when{ changeset '*.txt' }
-                steps{ echo "text files were changed" }
-            }
+        when{ not { branch 'main' } }
+        stage('report changes') { 
+            steps{ echo "branch ${BRANCH_NAME}" }
         }
+        when{ changeset '*.txt' }
+        stage('report changes') { 
+            steps{ echo "text files were changed" }
+        }   
     }
+}
