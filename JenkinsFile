@@ -1,13 +1,40 @@
 pipeline {
     agent any
+
+    triggers {
+        cron('H H * * *')
+    }
+
+    parameters {
+
+    }
+
     environment {
         PIPELINE_NAME = 'Test Pipeline'
 	}
+
+    options {
+    buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '5'))
+    timeout(time: 1, unit: 'HOURS')
+    retry(3)
+    }
+
     stages {
         stage('log title') {
             steps {
                 sh "echo /hello world ${PIPELINE_NAME} build number ${BUILD_NUMBER} >> testTextFile.txt"
                 echo "build number ${BUILD_NUMBER}"
+            }
+        }
+
+        stage('report changes') {
+            steps {
+                when( not { branch 'main' }) {
+                    echo "branch ${BRANCH_NAME}"
+                }
+                when( changeset "*.txt" ) {
+                    echo "text files were changed"
+                }
             }
         }
     }
