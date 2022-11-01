@@ -27,13 +27,24 @@ pipeline {
             }
         }
 
-        when{ not { branch 'main' } }
-        stage('report changes') { 
-            steps{ echo "branch ${BRANCH_NAME}" }
+        
+        stage('log secondary branch') { 
+            when { 
+                not { 
+                    branch 'main' 
+                } 
+            }
+            steps { 
+                echo "branch ${BRANCH_NAME}" 
+            }
         }
-        when{ changeset '*.txt' }
-        stage('report changes') { 
-            steps{ echo "text files were changed" }
+        stage('log text file changes') {
+            when{ 
+                changeset '*.txt' 
+            }
+            steps{ 
+                echo "text files were changed" 
+            }
         }   
     }
 }
