@@ -32,7 +32,7 @@ pipeline {
                 when( not { branch 'main' }) {
                     echo "branch ${BRANCH_NAME}"
                 }
-                when( changeset "*.txt" ) {
+                when( changeset '*.txt' ) {
                     echo "text files were changed"
                 }
             }
